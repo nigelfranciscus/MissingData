@@ -11,7 +11,7 @@ def distance(lat1, lon1, lat2, lon2):
 airport_data = open("C:/Users/s2876731.STAFF/Desktop/airports_preprocess.csv", mode='r+', encoding="utf-8")
 airport_reader = csv.reader(airport_data, delimiter=',')
 airport_dict = {each[4]: each[2:4] for each in airport_reader}
-#print(airport_dict.keys())
+# print(airport_dict.keys())
 
 
 missingfile = open('C:/Users/s2876731.STAFF/Desktop/NewCO2/missing.csv', mode='r+')
@@ -36,17 +36,15 @@ for each in missing_strip:
             b = value
             lat_long[each[0], each[1]] = a, b
 
-
-# print(lat_long)
-for key, value in lat_long.items():
-    print(key, value)
-
-
-# with open('C:/Users/s2876731.STAFF/Desktop/NewCO2/dict.csv', 'w') as csv_file:
-#     writer = csv.writer(csv_file)
-#     for key, value in lat_long.items():
-#         writer.writerow([key, value])
-
+with open('C:/Users/s2876731.STAFF/Desktop/NewCO2/dict.csv', 'w') as csv_file:
+    writer = csv.writer(csv_file, delimiter=',')
+    for key, value in lat_long.items():
+        origin_latitude = float(value[0][0])
+        origin_longitude = float(value[0][1])
+        destination_latitude = float(value[1][0])
+        destination_longitude = float(value[1][1])
+        calculation = distance(origin_latitude, origin_longitude, destination_latitude, destination_longitude)
+        writer.writerow([key, value, calculation])
 
 airport_data.close()
 missingfile.close()
