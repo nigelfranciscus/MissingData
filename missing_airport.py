@@ -9,7 +9,7 @@ def distance(lat1, lon1, lat2, lon2):
     return 12742 * asin(sqrt(a))
 
 
-airport_data = open("C:/Users/s2876731.STAFF/Desktop/airports_preprocess.csv", mode='r+', encoding="utf-8")
+airport_data = open("C:/Users/s2876731.STAFF/Desktop/NewCO2/airports_preprocess.csv", mode='r+', encoding="utf-8")
 airport_reader = csv.reader(airport_data, delimiter=',')
 airport_dict = {each[4]: each[2:4] for each in airport_reader}
 
@@ -21,10 +21,10 @@ lat_long = {}
 for each in missing_strip:
     for key, value in airport_dict.items():
         if each[0] == key:
-            a = value
+            first = value
         if each[1] == key:
-            b = value
-            lat_long[each[0], each[1]] = a, b
+            second = value
+            lat_long[each[0], each[1]] = first, second
 
 with open('C:/Users/s2876731.STAFF/Desktop/NewCO2/dict.csv', 'w') as csv_file:
     writer = csv.writer(csv_file, delimiter=',')
