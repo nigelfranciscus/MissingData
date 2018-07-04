@@ -15,7 +15,7 @@ airport_reader = csv.reader(
 airport_dict = {each[4]: each[2:4] for each in airport_reader}
 
 # read the brisbane airport information
-read_brisbane = csv.reader(open('C:/Users/s2876731.STAFF/Desktop/NewCO2/FlightData_BNE_2017-01.csv', mode='r+'),
+read_brisbane = csv.reader(open('C:/Users/s2876731.STAFF/Desktop/Flights/FlightData_AKL_2017-01.csv', mode='r+'),
                            delimiter=',')
 brisbane_location = [row[2:6] for row in read_brisbane]
 
@@ -34,7 +34,7 @@ for each_location in brisbane_location:
 #             print(each_value)
 
 
-with open('C:/Users/s2876731.STAFF/Desktop/NewCO2/bne_viz.csv', 'w') as csv_file:
+with open('C:/Users/s2876731.STAFF/Desktop/Flights/akl_viz.csv', 'w', newline='') as csv_file:
     writer = csv.writer(csv_file, delimiter=',')
     for key, value in lat_long.items():
         writer.writerow([key[0], key[1], key[2], key[3], value[0], value[1], value[2], value[3]])
