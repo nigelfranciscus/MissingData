@@ -12,7 +12,7 @@ def distance(lat1, lon1, lat2, lon2):
 
 # Read the airport location data
 airport_reader = csv.reader(
-    open("C:/Users/s2876731.STAFF/Desktop/NewCO2/airports_preprocess.csv", mode='r+', encoding="utf-8"), delimiter=',')
+    open("airports_preprocess.csv", mode='r+', encoding="utf-8"), delimiter=',')
 # Build key-value for IATA code and lat-long pair
 airport_dict = {each[4]: each[2:4] for each in airport_reader}
 
@@ -49,15 +49,16 @@ read_top400 = [next(file) for x in range(10)]
 
 lat_long = {}
 lower = 0.5
-upper = 5
-minimum = 30
-maximum = 39.704
+upper = 8
+max_value = max([float(x[3])/10**6 for x in read_top400])
+min_value = min([float(x[3])/10**6 for x in read_top400])
+count = 1
 for each_data in read_top400:
     first = airport_dict.get(each_data[0])
     second = airport_dict.get(each_data[1])
     ton = float(each_data[3]) / 1000000
     # normalization
-    lineThickness = lower + (ton - minimum) * (upper - lower) / (maximum - minimum)
+    lineThickness = lower + (ton - float(min_value)) * (upper - lower) / (float(max_value) - float(min_value))
 
     lat_long[each_data[0], each_data[1], round(lineThickness, 3)] = first, second
 
