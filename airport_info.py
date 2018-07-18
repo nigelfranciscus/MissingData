@@ -42,29 +42,29 @@ airport_dict = {each[4]: each[2:4] for each in airport_reader}
 #     for key, value in lat_long.items():
 #         writer.writerow([key[0], key[1], key[2], key[3], value[0], value[1], value[2], value[3]])
 
-read_top400 = csv.reader(open('Top400carbonroutes.csv', mode='r+'), delimiter=',')
-next(read_top400)
+file = csv.reader(open('Top400carbonroutes.csv', mode='r+'), delimiter=',')
+next(file)
+
+read_top400 = [next(file) for x in range(10)]
 
 lat_long = {}
 lower = 0.5
 upper = 5
-minimum = 6.976
+minimum = 30
 maximum = 39.704
 for each_data in read_top400:
     first = airport_dict.get(each_data[0])
     second = airport_dict.get(each_data[1])
-    ton = float(each_data[3])/1000000
+    ton = float(each_data[3]) / 1000000
     # normalization
-    lineThickness = lower + (ton - minimum)*(upper-lower)/(maximum-minimum)
+    lineThickness = lower + (ton - minimum) * (upper - lower) / (maximum - minimum)
 
     lat_long[each_data[0], each_data[1], round(lineThickness, 3)] = first, second
 
 for key, value in lat_long.items():
     print("{" + "origin:{ latitude: " + value[0][0] + ", longitude: " + value[0][1] + "}, destination: { latitude: " +
-           value[1][0] + ", longitude: " + value[1][1] + "}, strokeWidth: " + str(key[2]) +
-           " strokeColor: 'red', arcSharpness: 0.1 },")
-
-
+          value[1][0] + ", longitude: " + value[1][1] + "}, strokeWidth: " + str(key[2]) +
+          ", strokeColor: 'blue', arcSharpness: 0.1 },")
 
 # with open('C:/Users/s2876731.STAFF/Desktop/Flights/akl_viz.csv', 'w', newline='') as csv_file:
 #     writer = csv.writer(csv_file, delimiter=',')
