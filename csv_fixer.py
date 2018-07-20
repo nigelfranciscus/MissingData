@@ -13,10 +13,10 @@ for month in range(0, 12):
     next(filereader)
     for line in filereader:
         # New Amadeus Format (Why do they change?)
-        if line[2] == line[3]:
-            line[2] = ''
         if len(line[2]) == 0:
             line[1] = ''
+        if line[2] == line[3]:
+            line[2] = ''
 
         line.insert(0, 2017)
         line.insert(1, month)
