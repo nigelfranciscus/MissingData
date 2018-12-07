@@ -1,11 +1,13 @@
 import csv
 from itertools import islice
 
+current_year = 2018
+
 # iterate for 12 months
 for month in range(0, 12):
     month = month + 1
-    path = "D:/AIRtravel/New Monthly/New 2017/griffith_n_2017m0" + str(month) + ".csv"
-    out = "D:/AIRtravel/New Monthly/New 2017/griffith_nn_2017m0" + str(month) + ".csv"
+    path = "D:/AIRtravel/New Monthly/Latest/griffith_n_"+str(current_year)+"m0" + str(month) + ".csv"
+    out = "D:/AIRtravel/New Monthly/Latest/PyProcessed/griffith_nn_"+str(current_year)+"m0" + str(month) + ".csv"
     print(path)
     filereader = csv.reader(
         open(path, mode='r+', encoding="utf-8"), delimiter=',')
@@ -18,7 +20,7 @@ for month in range(0, 12):
         if line[2] == line[3]:
             line[2] = ''
 
-        line.insert(0, 2017)
+        line.insert(0, current_year)
         line.insert(1, month)
         line.insert(6, '')
         line.insert(7, '')
